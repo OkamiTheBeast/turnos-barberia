@@ -39,16 +39,38 @@ function dibujarLista() {
     datos.appendChild(nombreTurno);
     datos.appendChild(detalle);
 
-    var boton = document.createElement("button");
-    boton.type = "button";
-    boton.className = "cancelar";
-    boton.textContent = "Cancelar";
-    boton.addEventListener("click", function () {
+    if (turno.atendido) {
+      var etiqueta = document.createElement("span");
+      etiqueta.className = "etiqueta-atendido";
+      etiqueta.textContent = "Atendido";
+      datos.appendChild(etiqueta);
+      fila.className = "atendido";
+    }
+
+    var acciones = document.createElement("div");
+    acciones.className = "acciones";
+
+    var botonAtendido = document.createElement("button");
+    botonAtendido.type = "button";
+    botonAtendido.className = "marcar";
+    botonAtendido.textContent = turno.atendido ? "Marcar pendiente" : "Marcar atendido";
+    botonAtendido.addEventListener("click", function () {
+      alternarAtendido(turno.id);
+    });
+
+    var botonCancelar = document.createElement("button");
+    botonCancelar.type = "button";
+    botonCancelar.className = "cancelar";
+    botonCancelar.textContent = "Cancelar";
+    botonCancelar.addEventListener("click", function () {
       cancelarTurno(turno.id);
     });
 
+    acciones.appendChild(botonAtendido);
+    acciones.appendChild(botonCancelar);
+
     fila.appendChild(datos);
-    fila.appendChild(boton);
+    fila.appendChild(acciones);
     lista.appendChild(fila);
   });
 }
@@ -58,6 +80,15 @@ function cancelarTurno(id) {
     return turno.id !== id;
   });
   mostrarAviso("");
+  dibujarLista();
+}
+
+function alternarAtendido(id) {
+  turnos.forEach(function (turno) {
+    if (turno.id === id) {
+      turno.atendido = !turno.atendido;
+    }
+  });
   dibujarLista();
 }
 
@@ -88,7 +119,8 @@ formulario.addEventListener("submit", function (evento) {
     id: proximoId,
     nombre: textoNombre,
     dia: textoDia,
-    hora: textoHora
+    hora: textoHora,
+    atendido: false
   });
   proximoId = proximoId + 1;
 

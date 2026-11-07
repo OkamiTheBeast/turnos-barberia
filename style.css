@@ -113,8 +113,45 @@ li {
   font-size: 0.9rem;
 }
 
-.cancelar {
+.acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.acciones button {
   width: auto;
+}
+
+.marcar {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #065f46;
+  background: #d1fae5;
+}
+
+.marcar:hover {
+  background: #a7f3d0;
+}
+
+li.atendido .datos strong {
+  text-decoration: line-through;
+  color: #64748b;
+}
+
+.datos .etiqueta-atendido {
+  display: inline-block;
+  width: fit-content;
+  margin-top: 4px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #065f46;
+  background: #d1fae5;
+  border-radius: 999px;
+}
+
+.cancelar {
   padding: 8px 12px;
   font-size: 14px;
   color: #991b1b;
