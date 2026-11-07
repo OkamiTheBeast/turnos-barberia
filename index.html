@@ -3,13 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mi proyecto</title>
+  <title>Turnos de barbería</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Mi proyecto ya está en internet</h1>
-  <p id="mensaje">Todavía no apretaste el botón.</p>
-  <button id="boton">Apretame</button>
+  <main>
+    <h1>Turnos de la barbería</h1>
+
+    <form id="formulario">
+      <label for="nombre">Nombre del cliente</label>
+      <input id="nombre" type="text" autocomplete="off" placeholder="Ej.: Juan Pérez">
+
+      <div class="fila">
+        <div>
+          <label for="dia">Día</label>
+          <input id="dia" type="date">
+        </div>
+        <div>
+          <label for="hora">Hora</label>
+          <input id="hora" type="time">
+        </div>
+      </div>
+
+      <button type="submit" class="reservar">Reservar turno</button>
+      <p id="aviso" class="aviso" role="alert"></p>
+    </form>
+
+    <section>
+      <h2>Turnos reservados: <span id="contador">0</span></h2>
+      <ul id="lista"></ul>
+      <p id="vacio" class="vacio">Todavía no hay turnos reservados.</p>
+    </section>
+  </main>
   <script src="app.js"></script>
 </body>
 </html>
