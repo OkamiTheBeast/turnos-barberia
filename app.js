@@ -61,6 +61,12 @@ function cancelarTurno(id) {
   dibujarLista();
 }
 
+function horarioOcupado(diaBuscado, horaBuscada) {
+  return turnos.some(function (turno) {
+    return turno.dia === diaBuscado && turno.hora === horaBuscada;
+  });
+}
+
 formulario.addEventListener("submit", function (evento) {
   evento.preventDefault();
 
@@ -70,6 +76,11 @@ formulario.addEventListener("submit", function (evento) {
 
   if (textoNombre === "" || textoDia === "" || textoHora === "") {
     mostrarAviso("Completá el nombre, el día y la hora para reservar.");
+    return;
+  }
+
+  if (horarioOcupado(textoDia, textoHora)) {
+    mostrarAviso("Ese día y hora ya están ocupados. Elegí otro horario.");
     return;
   }
 
